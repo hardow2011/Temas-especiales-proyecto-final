@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
     @NonNull
@@ -21,17 +21,7 @@ public class User {
     @NonNull
     private Boolean isAdmin;
 
-    @Ignore
     public User(@NonNull String firstName, String lastName, @NonNull String userName, @NonNull String password, @NonNull Boolean isAdmin) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.isAdmin = isAdmin;
-    }
-
-    public User(int id, @NonNull String firstName, String lastName, @NonNull String userName, @NonNull String password, @NonNull Boolean isAdmin) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -52,42 +42,42 @@ public class User {
         return firstName;
     }
 
-    public void setFirstName(@NonNull String firstName) {
-        this.firstName = firstName;
-    }
+//    public void setFirstName(@NonNull String firstName) {
+//        this.firstName = firstName;
+//    }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
 
     @NonNull
     public String getUserName() {
         return userName;
     }
 
-    public void setUserName(@NonNull String userName) {
-        this.userName = userName;
-    }
+//    public void setUserName(@NonNull String userName) {
+//        this.userName = userName;
+//    }
 
     @NonNull
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(@NonNull String password) {
-        this.password = password;
-    }
+//    public void setPassword(@NonNull String password) {
+//        this.password = password;
+//    }
 
     @NonNull
     public Boolean getAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(@NonNull Boolean admin) {
-        isAdmin = admin;
-    }
+//    public void setAdmin(@NonNull Boolean admin) {
+//        isAdmin = admin;
+//    }
 }

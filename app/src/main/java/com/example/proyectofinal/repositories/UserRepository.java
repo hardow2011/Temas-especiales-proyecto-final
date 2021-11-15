@@ -16,7 +16,7 @@ public class UserRepository {
     private UserDao userDao;
     private LiveData<List<User>> allUsers;
 
-    private UserRepository(Application application) {
+    public UserRepository(Application application) {
         UserDatabase database = UserDatabase.getInstance(application);
         userDao = database.userDao();
         allUsers = userDao.findAllUsers();
@@ -34,7 +34,7 @@ public class UserRepository {
         new DeleteUserAsyncTask(userDao).execute(user);
     }
 
-    public void deleteAllUsers(User user) {
+    public void deleteAllUsers() {
         new DeleteAllUserAsyncTask(userDao).execute();
     }
 

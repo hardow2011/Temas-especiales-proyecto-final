@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.proyectofinal.database.dao.UserDao;
 import com.example.proyectofinal.database.models.User;
 
-@Database(entities = {User.class}, version = 1)
+@Database(entities = {User.class}, version = 4)
 public abstract class UserDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "userDatabase";
     private static final Object LOCK = new Object();
