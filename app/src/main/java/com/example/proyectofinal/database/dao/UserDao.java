@@ -1,5 +1,6 @@
-package com.example.proyectofinal.data.dao;
+package com.example.proyectofinal.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -7,7 +8,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.proyectofinal.data.models.User;
+import com.example.proyectofinal.database.models.User;
 
 import java.util.List;
 
@@ -18,33 +19,33 @@ public interface UserDao {
     // if there is an existing entry.
     // The default action is ABORT.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User user);
+    void insertUser(User user);
 
     @Insert
-    void insertAll(User... users);
+    void insertAllUsers(User... users);
 
     // Update multiple entries with one call.
     @Update
-    public void updateAll(User... users);
+    public void updateAllUsers(User... users);
 
     @Update
-    public void update(User user);
+    public void updateUser(User user);
 
     // Simple query that does not take parameters and returns nothing.
     @Query("DELETE FROM user")
-    void deleteAll();
+    void deleteAllUsers();
 
     @Delete
-    void delete(User user);
+    void deleteUser(User user);
 
     // Simple query without parameters that returns values.
-    @Query("SELECT * from user ORDER BY uid ASC")
-    List<User> getAll();
+    @Query("SELECT * from user ORDER BY id ASC")
+    LiveData<List<User>> findAllUsers();
 
-    @Query("SELECT * FROM user WHERE uid IN (:userIds)")
-    List<User> getAllByIds(int[] userIds);
+    @Query("SELECT * FROM user WHERE id IN (:userIds)")
+    LiveData<List<User>> findAllUsersByIds(int[] userIds);
 
-    @Query("SELECT * FROM user WHERE user_name = :userName AND password = :password")
+    @Query("SELECT * FROM user WHERE userName = :userName AND password = :password")
     User login(String userName, String password);
 
 
