@@ -7,12 +7,15 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.proyectofinal.adapters.UserAdapter;
 import com.example.proyectofinal.database.models.User;
 import com.example.proyectofinal.viewModel.UserViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -24,6 +27,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FloatingActionButton btnAddUser = findViewById(R.id.btn_add_user);
+        btnAddUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddUserActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
 
         RecyclerView userRecyclerView = findViewById(R.id.user_recycler_view);
         userRecyclerView.setLayoutManager(new LinearLayoutManager(this));
