@@ -49,6 +49,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>{
         notifyDataSetChanged();
     }
 
+    public User getUserAt(int position) {
+        return users.get(position);
+    }
+
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public class UserHolder extends RecyclerView.ViewHolder {
