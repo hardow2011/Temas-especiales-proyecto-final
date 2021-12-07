@@ -49,30 +49,30 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-//        session = new UserSession(getApplicationContext());
-//
-//
-//        //binding.email.setText("linleon@gmail.com");
-//        binding.email.setText("fr.pena@ce.pucmm.edu.do");
-//        binding.password.setText("123456");
-//
-//        //if user wants to register
-//        binding.registerNow.setOnClickListener(view -> {
-//            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-//            finish();
-//        });
-//
-//        binding.forgotPass.setOnClickListener(view -> {
-//            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
-//            finish();
-//        });
-//
-//        binding.loginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                attemptLogin();
-//            }
-//        });
+        session = new UserSession(getApplicationContext());
+
+
+        //binding.email.setText("linleon@gmail.com");
+        binding.email.setText("fr.pena@ce.pucmm.edu.do");
+        binding.password.setText("123456");
+
+        //if user wants to register
+        binding.registerNow.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            finish();
+        });
+
+        binding.forgotPass.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+            finish();
+        });
+
+        binding.loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                attemptLogin();
+            }
+        });
 
     }
 
