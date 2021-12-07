@@ -30,7 +30,7 @@ public class SplashActivity  extends AppCompatActivity {
 //        session = new UserSession(getApplicationContext());
 
         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String email = "f.ant.pena@gmail.com";
+        String email = "hardow2011@gmail.com";
         String password = "p@$$2u0rd";
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
