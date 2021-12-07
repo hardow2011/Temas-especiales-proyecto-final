@@ -7,13 +7,13 @@
 
     <fragment
             android:id="@+id/nav_home"
-            android:name="com.pucmm.csti.ui.home.HomeFragment"
+            android:name="com.example.proyectofinal.ui.home.HomeFragment"
             android:label="@string/menu_home"
             tools:layout="@layout/fragment_home"/>
 
     <fragment
             android:id="@+id/nav_category"
-            android:name="com.pucmm.csti.ui.category.CategoryFragment"
+            android:name="com.example.proyectofinal.ui.category.CategoryFragment"
             android:label="@string/menu_category"
             tools:layout="@layout/fragment_category">
 
@@ -28,7 +28,7 @@
 
     <fragment
             android:id="@+id/nav_category_man"
-            android:name="com.pucmm.csti.ui.category.CategoryFragmentManager"
+            android:name="com.example.proyectofinal.ui.category.CategoryFragmentManager"
             tools:layout="@layout/fragment_category_manager">
 
         <action
@@ -39,7 +39,7 @@
 
     <fragment
             android:id="@+id/nav_product"
-            android:name="com.pucmm.csti.ui.product.ProductFragment"
+            android:name="com.example.proyectofinal.ui.product.ProductFragment"
             android:label="@string/menu_product"
             tools:layout="@layout/fragment_product">
 
@@ -60,7 +60,7 @@
 
     <fragment
             android:id="@+id/nav_product_man"
-            android:name="com.pucmm.csti.ui.product.ProductFragmentManager"
+            android:name="com.example.proyectofinal.ui.product.ProductFragmentManager"
             tools:layout="@layout/fragment_product_manager">
 
         <action
@@ -71,7 +71,7 @@
 
     <fragment
             android:id="@+id/nav_product_details"
-            android:name="com.pucmm.csti.ui.product.ProductFragmentDetails"
+            android:name="com.example.proyectofinal.ui.product.ProductFragmentDetails"
             tools:layout="@layout/fragment_product_details">
 
 
