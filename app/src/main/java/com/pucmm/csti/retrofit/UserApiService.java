@@ -22,7 +22,7 @@ public interface UserApiService {
     Call<Userr> create(@Body Userr user);
 
     @PUT("users/change")
-    Call<Void> changePassword(@Body Userr user);
+    Call<Void> changePassword(@Body JsonObject user);
 
     @POST("users/login")
     Call<Userr> login(@Body JsonObject user);
