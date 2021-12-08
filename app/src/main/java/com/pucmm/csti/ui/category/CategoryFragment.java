@@ -2,6 +2,8 @@ package com.pucmm.csti.ui.category;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.pucmm.csti.R;
+import com.pucmm.csti.database.ProductDao;
 import com.pucmm.csti.databinding.FragmentCategoryBinding;
 import com.pucmm.csti.database.AppDataBase;
 import com.pucmm.csti.database.AppExecutors;
@@ -44,6 +47,7 @@ public class CategoryFragment extends Fragment {
 
     private FragmentCategoryBinding binding;
     private CategoryDao categoryDao;
+    private ProductDao productDao;
     //to get user session data
     private UserSession session;
     private Userr user;
@@ -55,6 +59,7 @@ public class CategoryFragment extends Fragment {
         retrieveSession();
 
         categoryDao = AppDataBase.getInstance(getContext()).categoryDao();
+        productDao = AppDataBase.getInstance(getContext()).productDao();
     }
 
     @Override
@@ -99,15 +104,31 @@ public class CategoryFragment extends Fragment {
 
         adapter.setOptionsMenuListener((OptionsMenuListener<Category>) (view1, element) -> {
             CommonUtil.popupMenu(getContext(), view1, () -> {
+
                 final Bundle bundle = new Bundle();
                 bundle.putSerializable(Constants.CATEGORY, element);
 
                 NavHostFragment.findNavController(CategoryFragment.this)
                         .navigate(R.id.action_nav_category_to_nav_category_man, bundle);
             }, () -> {
-                CommonUtil.alertDialog(getContext(), "Confirm dialog delete!",
-                        "You are about to delete record. Do you really want to proceed?",
-                        () -> delete(element));
+                AppExecutors.getInstance().diskIO().execute(() -> {
+                    int categoryId = element.getUid();
+                    int categoryProductCount = productDao.findCountByCategory(categoryId);
+
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(categoryProductCount > 0) {
+                                FancyToast.makeText(getContext(), "This category has one or more products. It can't be deleted", FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+                            } else {
+                                CommonUtil.alertDialog(getContext(), "Confirm dialog delete!",
+                                        "You are about to delete record. Do you really want to proceed?",
+                                        () -> delete(element));
+                            }
+                        }
+                    });
+
+                });
             });
         });
 
@@ -132,6 +153,11 @@ public class CategoryFragment extends Fragment {
     }
 
     private void delete(Category element) {
+
+        System.out.println("22");
+        System.out.println(element.getUid());
+        System.out.println("22");
+
         final KProgressHUD progressDialog = new KProgressHUDUtils(getActivity()).showConnecting();
 
         if (element.getPhoto() != null && !element.getPhoto().isEmpty()) {

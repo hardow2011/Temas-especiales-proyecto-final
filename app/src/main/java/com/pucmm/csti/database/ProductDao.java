@@ -41,4 +41,6 @@ public interface ProductDao {
     @Delete
     void deleteCarousels(List<Carousel> carousels);
 
+    @Query("SELECT COUNT(*) FROM product WHERE category = :category")
+    int findCountByCategory(int category);
 }

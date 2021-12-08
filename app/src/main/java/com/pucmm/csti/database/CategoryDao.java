@@ -19,6 +19,9 @@ public interface CategoryDao {
     @Query("SELECT * FROM category WHERE uid = :uid")
     Category find(int uid);
 
+    @Query("SELECT * FROM category WHERE name = :name")
+    Category findByName(String name);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     long insert(Category category);
 
