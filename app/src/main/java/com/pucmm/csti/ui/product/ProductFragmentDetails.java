@@ -10,9 +10,14 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toolbar;
+
 import com.jama.carouselview.CarouselView;
 import com.jama.carouselview.CarouselViewListener;
 import com.jama.carouselview.enums.IndicatorAnimationType;
@@ -107,7 +112,15 @@ public class ProductFragmentDetails extends Fragment {
         binding.action.setOnClickListener(v -> {
 
             //session.addToCart(product, Integer.valueOf(qty.getText().toString()));
-
+            FragmentActivity mainActivity = getActivity();
+            View actionCart = mainActivity.findViewById(R.id.action_cart);
+            TextView cartBadge = actionCart.findViewById(R.id.cart_badge);
+            String cartBadgeQty = String.valueOf(Integer.parseInt(cartBadge.getText().toString()) + Integer.parseInt(binding.qty.getText().toString()));
+            cartBadge.setText(cartBadgeQty);
+            System.out.println("33");
+            System.out.println(cartBadge);
+            System.out.println("33");
+//            cartBadge.setText(toolbar);
             IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
             //getContext().registerReceiver(BroadcastReceiverManager.obtain().getReceiverBadge(), filter);
 
