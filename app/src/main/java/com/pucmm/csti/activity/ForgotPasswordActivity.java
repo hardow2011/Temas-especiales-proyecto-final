@@ -99,6 +99,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 //                        finish();
                         break;
                     default:
+                        Toast.makeText(ForgotPasswordActivity.this, "The email doesn't exist", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
