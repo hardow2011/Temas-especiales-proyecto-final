@@ -34,6 +34,7 @@ import com.pucmm.csti.utils.KProgressHUDUtils;
 import com.pucmm.csti.utils.UserSession;
 import com.shashank.sony.fancytoastlib.FancyToast;
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +112,8 @@ public class ProductFragmentDetails extends Fragment {
 
         binding.action.setOnClickListener(v -> {
 
+            System.out.println(element.product);
+            System.out.println(Integer.valueOf(binding.qty.getText().toString()));
             session.addToCart(element.product, Integer.valueOf(binding.qty.getText().toString()));
             FragmentActivity mainActivity = getActivity();
             View actionCart = mainActivity.findViewById(R.id.action_cart);

@@ -3,6 +3,8 @@ package com.pucmm.csti.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -11,10 +13,16 @@ import com.pucmm.csti.activity.LoginActivity;
 import com.pucmm.csti.model.Product;
 import com.pucmm.csti.model.Userr;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserSession {
 
@@ -37,6 +45,7 @@ public class UserSession {
 
     public static final String CARTS = "carts";
     public static final String KEY_QTY = "qty";
+    public static final String CART_SIZE = "cart_size";
 
     public UserSession(Context context) {
         this.context = context;
@@ -124,7 +133,33 @@ public class UserSession {
         editor.commit();
     * */
     public void addToCart(final Product product, final int qty) {
-        new Gson().toJson(product);
+
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(new Gson().toJson(product));
+        editor.putString(CARTS, jsonArray.toString());
+        editor.putString(KEY_QTY, String.valueOf(qty));
+        editor.commit();
+
+        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+        String strJson = sharedPreferences.getString(CARTS,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
+        System.out.println(strJson);
+
+
+
+
+//        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+//        System.out.println(new Gson().toJson(product));
+//        sharedPreferences.edit().putString(CARTS, new Gson().toJson(product));
+//        sharedPreferences.edit().putString(KEY_QTY, String.valueOf(qty));
+//
+//        String cart = sharedPreferences.getString(CARTS, "0");
+//        String qtyy = sharedPreferences.getString(KEY_QTY, "0");
+
+//        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+//        System.out.println(cart);
+//        System.out.println(qtyy);
+//        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+
     }
 
     private JsonArray sortedCart(String jsonArrStr) {
