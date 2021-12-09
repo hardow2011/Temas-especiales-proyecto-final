@@ -126,6 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
+            user.setPhoto("");
             final Call<Userr> userCreateCall = retrofit.create(UserApiService.class).create(user);
 
             call(userCreateCall, error -> {
@@ -133,25 +134,26 @@ public class RegisterActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     return;
                 }
+                progressDialog.dismiss();
 
-                FirebaseNetwork.obtain().upload(uri, String.format("profile/%s.jpg", user.getUid()),
-                        new NetResponse<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                FancyToast.makeText(RegisterActivity.this, "Successfully upload image", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
-
-                                user.setPhoto(response);
-                                final Call<Userr> userUpdateCall = retrofit.create(UserApiService.class).update(user);
-
-                                call(userUpdateCall, res1 -> progressDialog.dismiss());
-                            }
-
-                            @Override
-                            public void onFailure(Throwable t) {
-                                progressDialog.dismiss();
-                                FancyToast.makeText(RegisterActivity.this, t.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
-                            }
-                        });
+//                FirebaseNetwork.obtain().upload(uri, String.format("profile/%s.jpg", user.getUid()),
+//                        new NetResponse<String>() {
+//                            @Override
+//                            public void onResponse(String response) {
+//                                FancyToast.makeText(RegisterActivity.this, "Successfully upload image", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, false).show();
+//
+//                                user.setPhoto(response);
+//                                final Call<Userr> userUpdateCall = retrofit.create(UserApiService.class).update(user);
+//
+//                                call(userUpdateCall, res1 -> progressDialog.dismiss());
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Throwable t) {
+//                                progressDialog.dismiss();
+//                                FancyToast.makeText(RegisterActivity.this, t.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, false).show();
+//                            }
+//                        });
             });
         }
     }
