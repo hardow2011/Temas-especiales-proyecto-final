@@ -30,6 +30,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -64,6 +67,17 @@ dependencies {
     implementation 'com.kaopiz:kprogresshud:1.2.0'
     implementation 'com.mikhaellopez:circularimageview:4.3.0'
     implementation 'com.github.jama5262:CarouselView:1.2.2'
+
+
+//    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore
+//    implementation group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.15'
+
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
+
+
+
 
 }
 

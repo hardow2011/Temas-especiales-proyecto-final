@@ -71,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        navigationView.getMenu().findItem(R.id.nav_profile).setOnMenuItemClickListener(item -> {
+            //After logout redirect user to Login Activity
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            //Staring Login Activity
+            startActivity(intent);
+            //Finish all the Activities
+            finish();
+            return true;
+        });
+
         View headerLayout = navigationView.getHeaderView(0);
         CircularImageView profile = headerLayout.findViewById(R.id.profile);
         TextView titleMain = headerLayout.findViewById(R.id.titleMain);

@@ -24,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+
 //        Log.e("Splash CheckPoint", "SplashActivity started");
 //        session = new UserSession(getApplicationContext());
 
@@ -73,12 +74,18 @@ public class SplashActivity extends AppCompatActivity {
             // Start your app main activity
             //session.checkLogin();
 
-           // if(session.isLoggedIn()){
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-                finish();
-           // }
+            // if(session.isLoggedIn()){
+            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            finish();
+            // }
 
 
         }, SPLASH_TIME_OUT);
+    }
+
+    private void retrieveSession() {
+        //create new session object by passing application context
+        session = new UserSession(getApplicationContext());
+        //get User details if logged in
     }
 }

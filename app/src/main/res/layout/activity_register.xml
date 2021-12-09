@@ -104,34 +104,36 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                android:id="@+id/passwordWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <EditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_password"
-                        android:background="@color/colorOnPrimary"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:singleLine="true"/>
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorOnPrimary"
+                    android:hint="@string/prompt_password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                android:id="@+id/passwordRepeatWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <EditText
-                        android:id="@+id/repeatPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/prompt_repeat_password"
-                        android:background="@color/colorOnPrimary"
-                        android:inputType="textPassword"
-                        android:maxLines="1"
-                        android:singleLine="true"/>
+                    android:id="@+id/repeatPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorOnPrimary"
+                    android:hint="@string/prompt_repeat_password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -239,6 +241,15 @@
                         android:text="@string/btn_login_now"/>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/goBack"
+                style="@style/AppTheme.RoundedCornerMaterialTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/go_back"
+                tools:visibility="invisible" />
 
 
         </LinearLayout>

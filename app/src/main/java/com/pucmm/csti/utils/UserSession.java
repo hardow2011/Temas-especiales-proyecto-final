@@ -64,6 +64,11 @@ public class UserSession {
         editor.commit();
     }
 
+    public void updateLoggedUser(final Userr user) {
+        editor.putString(USER, new Gson().toJson(user));
+        editor.commit();
+    }
+
     /**
      * Get stored session data
      */
@@ -140,7 +145,6 @@ public class UserSession {
         editor.putString(KEY_QTY, String.valueOf(qty));
         editor.commit();
 
-        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
         String strJson = sharedPreferences.getString(CARTS,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
         System.out.println(strJson);
 
