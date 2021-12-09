@@ -154,9 +154,6 @@ public class CategoryFragment extends Fragment {
 
     private void delete(Category element) {
 
-        System.out.println("22");
-        System.out.println(element.getUid());
-        System.out.println("22");
 
         final KProgressHUD progressDialog = new KProgressHUDUtils(getActivity()).showConnecting();
 
