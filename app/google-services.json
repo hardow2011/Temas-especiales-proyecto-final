@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "665310148450",
-    "firebase_url": "https://e-commerce-addaa.firebaseio.com",
-    "project_id": "e-commerce-addaa",
-    "storage_bucket": "e-commerce-addaa.appspot.com"
+    "project_number": "548153651409",
+    "project_id": "fir-especiales",
+    "storage_bucket": "fir-especiales.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:665310148450:android:3de4149f239f43eb031e3b",
+        "mobilesdk_app_id": "1:548153651409:android:f54f4c2291647287f115f0",
         "android_client_info": {
           "package_name": "com.pucmm.csti"
         }
       },
       "oauth_client": [
         {
-          "client_id": "665310148450-spa1k3v6vboo7eb3l11kr513ssaq14jn.apps.googleusercontent.com",
+          "client_id": "548153651409-s9t77mdq7ju0t8na374ro86jdpg1s3jq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pucmm.csti",
+            "certificate_hash": "c86a096f5f1017295a3a664388092b956b402a67"
+          }
+        },
+        {
+          "client_id": "548153651409-ibmgh14h0b1efiilbp47f5o9b4mt2ear.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBvBgUQZMpVRyI6e2oBmL9WpiH0KTix8Ss"
+          "current_key": "AIzaSyDmLFsZWX5FxYAG8MrCtXhH0OX89H_2ffk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "665310148450-spa1k3v6vboo7eb3l11kr513ssaq14jn.apps.googleusercontent.com",
+              "client_id": "548153651409-ibmgh14h0b1efiilbp47f5o9b4mt2ear.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
