@@ -17,7 +17,7 @@ public class FirebaseNetwork {
     private static final String TAG = "FirebaseNetwork";
 
     private static final String PATH_UPLOAD = "test/";
-    private static final String URL_DOWNLOAD = String.format("gs://e-commerce-addaa.appspot.com/%s", PATH_UPLOAD);
+    private static final String URL_DOWNLOAD = String.format("gs://fir-especiales.appspot.com/%s", PATH_UPLOAD);
     private static final long ONE_MEGABYTE = 1024 * 1024;
 
     private static FirebaseNetwork sInstance;
