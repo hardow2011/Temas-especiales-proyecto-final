@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pucmm.csti.R;
@@ -29,9 +30,11 @@ public class SplashActivity extends AppCompatActivity {
 //        session = new UserSession(getApplicationContext());
 
         final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        String email = "f.ant.pena@gmail.com";
+        String email = "20170639@ce.pucmm.edu.do";
         String password = "p@$$2u0rd";
 
+        System.out.println("FirebaseApp.getInstance().getOptions().getProjectId()");
+        System.out.println(FirebaseApp.getInstance().getOptions().getProjectId());
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
                     Log.e("SplashActivity", "signInWithEmailAndPassword:success");
@@ -40,9 +43,11 @@ public class SplashActivity extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.e("SplashActivity", "signInWithEmailAndPassword:failure");
+                        Log.e("SplashActivity", String.valueOf(e));
                     }
                 });
+
+        firebaseAuth.signOut();
 
 //          firebaseAuth.createUserWithEmailAndPassword(email, password)
 //                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
