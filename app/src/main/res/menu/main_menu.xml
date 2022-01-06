@@ -19,7 +19,6 @@
             android:orderInCategory="100"
             android:title="@string/action_cart"
             app:showAsAction="always"
-            android:icon="@drawable/ic_menu_action_shopping_cart"
-            app:actionLayout="@layout/badge_layout"/>
+            android:icon="@drawable/ic_menu_action_shopping_cart"/>
 
 </menu>
