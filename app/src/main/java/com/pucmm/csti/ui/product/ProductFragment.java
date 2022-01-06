@@ -105,8 +105,8 @@ public class ProductFragment extends Fragment {
                 bundle.putSerializable(Constants.PRODUCT_CAROUSEL, element);
                 bundle.putSerializable(Constants.USER, user);
 
-                NavHostFragment.findNavController(ProductFragment.this)
-                        .navigate(R.id.action_nav_product_to_nav_product_man, bundle);
+//                NavHostFragment.findNavController(ProductFragment.this)
+//                        .navigate(R.id.action_nav_product_to_nav_product_man, bundle);
             }, () -> {
                 CommonUtil.alertDialog(getContext(), "Confirm dialog delete!",
                         "You are about to delete record. Do you really want to proceed?",
