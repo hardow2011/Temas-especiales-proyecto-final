@@ -112,9 +112,13 @@ public class ProductFragmentDetails extends Fragment {
 
         binding.action.setOnClickListener(v -> {
 
-            System.out.println(element.product);
-            System.out.println(Integer.valueOf(binding.qty.getText().toString()));
-            session.addToCart(element.product, Integer.valueOf(binding.qty.getText().toString()));
+//            System.out.println(element.product);
+//            System.out.println(Integer.valueOf(binding.qty.getText().toString()));
+            try {
+                session.addToCart(element.product, Integer.valueOf(binding.qty.getText().toString()));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             FragmentActivity mainActivity = getActivity();
             View actionCart = mainActivity.findViewById(R.id.action_cart);
             TextView cartBadge = actionCart.findViewById(R.id.cart_badge);
