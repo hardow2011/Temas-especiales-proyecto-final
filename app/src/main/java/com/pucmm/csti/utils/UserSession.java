@@ -3,38 +3,26 @@ package com.pucmm.csti.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.pucmm.csti.R;
 import com.pucmm.csti.activity.LoginActivity;
-import com.pucmm.csti.activity.MainActivity;
-import com.pucmm.csti.databinding.ActivityMainBinding;
 import com.pucmm.csti.databinding.BadgeLayoutBinding;
-import com.pucmm.csti.model.Product;
 import com.pucmm.csti.model.Userr;
+import com.pucmm.csti.model.relationships.ProductWithCarousel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class UserSession extends Fragment {
 
@@ -74,6 +62,8 @@ public class UserSession extends Fragment {
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(USER, new Gson().toJson(user));
+//        editor.putString(CARTS, "[]");
+//        editor.putString(KEY_QTY, "[]");
         // commit changes
         editor.commit();
     }
@@ -144,6 +134,62 @@ public class UserSession extends Fragment {
         return sortedCart(sharedPreferences.getString(CARTS, "[]"));
     }
 
+    public ArrayList<JSONObject> getSimpleCart() throws JSONException {
+
+        JSONArray jsonArray = new JSONArray(sharedPreferences.getString(CARTS, "[]"));
+
+        ArrayList<JSONObject> listdata = new ArrayList<JSONObject>();
+
+        //Checking whether the JSON array has some value or not
+        if (jsonArray != null) {
+
+            //Iterating JSON array
+            for (int i=0;i<jsonArray.length();i++){
+
+                //Adding each element of JSON array into ArrayList
+                JSONObject jsonObject = new JSONObject(jsonArray.get(i).toString());
+                listdata.add(jsonObject);
+            }
+        }
+
+        return listdata;
+    }
+
+    public ArrayList<String> getCartQuantities() throws JSONException {
+        JSONArray jsonArray = new JSONArray(sharedPreferences.getString(KEY_QTY, "[]"));
+
+        ArrayList<String> listdata = new ArrayList<String>();
+
+        //Checking whether the JSON array has some value or not
+        if (jsonArray != null) {
+
+            //Iterating JSON array
+            for (int i=0;i<jsonArray.length();i++){
+
+                //Adding each element of JSON array into ArrayList
+                listdata.add(jsonArray.get(i).toString());
+            }
+        }
+
+        return listdata;
+    }
+
+    public void replaceCartQuantities(ArrayList<String> newQuantities) throws JSONException {
+
+        JSONArray qtyJsonArray = new JSONArray();
+
+
+        for (String newQuantity : newQuantities)
+        {
+            qtyJsonArray.put(new Gson().toJson(Integer.parseInt(newQuantity)));
+        }
+
+        editor.putString(KEY_QTY, qtyJsonArray.toString());
+        editor.commit();
+        System.out.println("COMMITED");
+        System.out.println(qtyJsonArray.toString());
+    }
+
     public int getCartLength() {
         return sharedPreferences.getString(CARTS,"[]").length();
     }
@@ -155,7 +201,7 @@ public class UserSession extends Fragment {
         // commit changes
         editor.commit();
     * */
-    public void addToCart(final Product product, final int qty) throws JSONException {
+    public void addToCart(final ProductWithCarousel product, final int qty) throws JSONException {
 
         String cartsStrJson = sharedPreferences.getString(CARTS,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
         String qtyStrJson = sharedPreferences.getString(KEY_QTY,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
@@ -178,35 +224,6 @@ public class UserSession extends Fragment {
         System.out.println(cartsStrJson);
         System.out.println(qtyStrJson);
         System.out.println("CARTS");
-
-//        FragmentActivity mainActivity = getActivity().mai;
-//        View actionCart = mainActivity.findViewById(R.id.action_cart);
-//        TextView cartBadge = actionCart.findViewById(R.id.cart_badge);
-//        String cartBadgeQty = Integer.parseInt(cartBadge.getText().toString()) + String.valueOf(qty);
-//        cartBadge.setText(cartBadgeQty);
-
-
-//        FragmentActivity mainActivity = getActivity();
-//        View actionCart = mainActivity.findViewById(R.id.action_cart);
-//        TextView cartBadge = actionCart.findViewById(R.id.cart_badge);
-//        String cartBadgeQty = String.valueOf(Integer.parseInt(cartBadge.getText().toString()) + Integer.parseInt(binding.qty.getText().toString()));
-//        cartBadge.setText(cartBadgeQty);
-
-
-
-
-//        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-//        System.out.println(new Gson().toJson(product));
-//        sharedPreferences.edit().putString(CARTS, new Gson().toJson(product));
-//        sharedPreferences.edit().putString(KEY_QTY, String.valueOf(qty));
-//
-//        String cart = sharedPreferences.getString(CARTS, "0");
-//        String qtyy = sharedPreferences.getString(KEY_QTY, "0");
-
-//        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-//        System.out.println(cart);
-//        System.out.println(qtyy);
-//        System.out.println("LLLLLLLLLLLLLLLLLLLLLLLLLLLL");
 
     }
 

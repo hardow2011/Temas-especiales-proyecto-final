@@ -17,6 +17,8 @@ import androidx.navigation.ui.NavigationUI;
 import com.pucmm.csti.databinding.ActivityCartBinding;
 
 import com.pucmm.csti.R;
+//import com.pucmm.csti.ui.product.CartFragment;
+import com.pucmm.csti.ui.product.CartFragment;
 import com.pucmm.csti.utils.UserSession;
 
 public class CartActivity extends AppCompatActivity {
@@ -24,18 +26,19 @@ public class CartActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityCartBinding binding;
 
-    //to get user session data
-    private UserSession session;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //retrieve session values and display
-        retrieveSession();
+
 
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        CartFragment cartFragment = new CartFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.cart_activity_container, cartFragment).commit();
 
         setSupportActionBar(binding.toolbar);
 
@@ -57,11 +60,5 @@ public class CartActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
-
-    private void retrieveSession() {
-        //create new session object by passing application context
-        session = new UserSession(getApplicationContext());
-        //get User details if logged in
     }
 }

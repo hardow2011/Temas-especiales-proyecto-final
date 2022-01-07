@@ -115,15 +115,15 @@ public class ProductFragmentDetails extends Fragment {
 //            System.out.println(element.product);
 //            System.out.println(Integer.valueOf(binding.qty.getText().toString()));
             try {
-                session.addToCart(element.product, Integer.valueOf(binding.qty.getText().toString()));
+                session.addToCart(element, Integer.valueOf(binding.qty.getText().toString()));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            FragmentActivity mainActivity = getActivity();
-            View actionCart = mainActivity.findViewById(R.id.action_cart);
-            TextView cartBadge = actionCart.findViewById(R.id.cart_badge);
-            String cartBadgeQty = String.valueOf(Integer.parseInt(cartBadge.getText().toString()) + Integer.parseInt(binding.qty.getText().toString()));
-            cartBadge.setText(cartBadgeQty);
+//            FragmentActivity mainActivity = getActivity();
+//            View actionCart = mainActivity.findViewById(R.id.action_cart);
+//            TextView cartBadge = actionCart.findViewById(R.id.cart_badge);
+//            String cartBadgeQty = String.valueOf(Integer.parseInt(cartBadge.getText().toString()) + Integer.parseInt(binding.qty.getText().toString()));
+//            cartBadge.setText(cartBadgeQty);
 //            cartBadge.setText(toolbar);
             IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
             //getContext().registerReceiver(BroadcastReceiverManager.obtain().getReceiverBadge(), filter);
