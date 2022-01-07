@@ -18,6 +18,7 @@ import com.pucmm.csti.activity.LoginActivity;
 import com.pucmm.csti.activity.MainActivity;
 import com.pucmm.csti.activity.RegisterActivity;
 import com.pucmm.csti.model.Product;
+import com.pucmm.csti.utils.CommonUtil;
 import com.pucmm.csti.utils.UserSession;
 
 import org.json.JSONException;
@@ -74,12 +75,10 @@ public class CartAdapter extends ArrayAdapter<JSONObject> {
         try {
             cartName.setText(cartItem.getJSONObject("product").getString("itemName"));
             cartItemQuantity.setText(session.getCartQuantities().get(position));
-            System.out.println("session.getCartQuantities()");
-            System.out.println(session.getCartQuantities());
-            System.out.println("session.getCartQuantities().get(position)");
-            System.out.println(session.getCartQuantities().get(position));
-            System.out.println("position");
-            System.out.println(position);
+            System.out.println("cartItem.getJSONObject(\"carousels\")");
+            System.out.println(cartItem.getJSONArray("carousels").getJSONObject(0).getString("photo"));
+            CommonUtil.downloadImage(cartItem.getJSONArray("carousels").getJSONObject(0).getString("photo"), cartImage);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
