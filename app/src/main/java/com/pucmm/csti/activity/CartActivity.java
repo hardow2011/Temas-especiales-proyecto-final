@@ -19,6 +19,7 @@ import com.pucmm.csti.databinding.ActivityCartBinding;
 import com.pucmm.csti.R;
 //import com.pucmm.csti.ui.product.CartFragment;
 import com.pucmm.csti.ui.product.CartFragment;
+import com.pucmm.csti.ui.product.NotificationsFragment;
 import com.pucmm.csti.utils.UserSession;
 
 public class CartActivity extends AppCompatActivity {
@@ -32,13 +33,25 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Bundle bundle = getIntent().getExtras();
+        String listToOpen = bundle.getString("listToOpen");
+
+        System.out.println("listToOpen");
+        System.out.println(listToOpen);
 
 
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         CartFragment cartFragment = new CartFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.cart_activity_container, cartFragment).commit();
+        NotificationsFragment notificationsFragment = new NotificationsFragment();
+
+        if(listToOpen.equals("cart")) {
+            getSupportFragmentManager().beginTransaction().add(R.id.cart_activity_container, cartFragment).commit();
+        } else {
+            getSupportFragmentManager().beginTransaction().add(R.id.cart_activity_container, notificationsFragment).commit();
+        }
+
 
         setSupportActionBar(binding.toolbar);
 

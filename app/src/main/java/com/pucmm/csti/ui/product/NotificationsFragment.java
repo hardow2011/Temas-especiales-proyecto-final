@@ -1,6 +1,5 @@
 package com.pucmm.csti.ui.product;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,27 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.pucmm.csti.R;
-import com.pucmm.csti.activity.CartActivity;
-import com.pucmm.csti.activity.MainActivity;
 import com.pucmm.csti.utils.UserSession;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CartFragment#newInstance} factory method to
+ * Use the {@link NotificationsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CartFragment extends Fragment {
+public class NotificationsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,7 +37,7 @@ public class CartFragment extends Fragment {
     //to get user session data
     private UserSession session;
 
-    public CartFragment() {
+    public NotificationsFragment() {
         // Required empty public constructor
     }
 
@@ -53,11 +47,11 @@ public class CartFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CartFragment.
+     * @return A new instance of fragment NotificationsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CartFragment newInstance(String param1, String param2) {
-        CartFragment fragment = new CartFragment();
+    public static NotificationsFragment newInstance(String param1, String param2) {
+        NotificationsFragment fragment = new NotificationsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,56 +73,28 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        View view = inflater.inflate(R.layout.fragment_cart, container, false);
-
-//        String[] cartItems = {"Do someting!", "Do some else", "Saludps"};
-//        ArrayList<JSONObject> cartItems = new ArrayList<>();
-        ArrayList<JSONObject> cartItems = null;
-//        ArrayList<String> cartQuantities = null;
+        ArrayList<String> notificationItems = null;
         try {
-            cartItems = session.getSimpleCart();
+            notificationItems = session.getNotifications();
+            Collections.reverse(notificationItems);
 //            cartQuantities = session.getCartQuantities();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Button completePurchase = view.findViewById(R.id.completePurchase);
+        ListView listView = view.findViewById(R.id.notificationsList);
 
-        completePurchase.setOnClickListener( new View.OnClickListener() {
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(
+                getActivity(),
+                android.R.layout.simple_list_item_1,
+                notificationItems
+        );
 
-            @Override
-            public void onClick(View v) {
-                session.clearCart();
-                try {
-                    session.addToNotifications("Purcase completed");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        listView.setAdapter(listViewAdapter);
 
-        if(cartItems.size() > 0) {
-            completePurchase.setVisibility(View.VISIBLE);
-        } else {
-            completePurchase.setVisibility(View.INVISIBLE);
-        }
-
-        ListView listView = (ListView) view.findViewById(R.id.cartList);
-
-//        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(
-//                getActivity(),
-//                R.layout.cart_item,
-//                cartItems
-//        );
-
-        CartAdapter cartAdapter = new CartAdapter(getActivity(), cartItems);
-
-        listView.setAdapter(cartAdapter);
-
-        // Inflate the layout for this fragment
         return view;
     }
 

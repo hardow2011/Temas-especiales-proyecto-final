@@ -136,9 +136,13 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_search) {
             return true;
         } else if (id == R.id.action_notifications) {
+            Intent intent = new Intent(this, CartActivity.class);
+            intent.putExtra("listToOpen", "notifications");
+            startActivity(intent);
             return true;
         } else if (id == R.id.action_cart) {
             Intent intent = new Intent(this, CartActivity.class);
+            intent.putExtra("listToOpen", "cart");
             startActivity(intent);
             return true;
         }

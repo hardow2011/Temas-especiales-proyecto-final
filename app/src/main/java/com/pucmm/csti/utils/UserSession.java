@@ -45,6 +45,7 @@ public class UserSession extends Fragment {
 
     public static final String CARTS = "carts";
     public static final String KEY_QTY = "qty";
+    public static final String NOTIFICATIONS = "notifications";
     public static final String CART_SIZE = "cart_size";
 
     private BadgeLayoutBinding binding;
@@ -64,6 +65,7 @@ public class UserSession extends Fragment {
         editor.putString(USER, new Gson().toJson(user));
 //        editor.putString(CARTS, "[]");
 //        editor.putString(KEY_QTY, "[]");
+//        editor.putString(NOTIFICATIONS, "[]");
         // commit changes
         editor.commit();
     }
@@ -155,6 +157,27 @@ public class UserSession extends Fragment {
         return listdata;
     }
 
+    public ArrayList<String> getNotifications() throws JSONException {
+
+        JSONArray jsonArray = new JSONArray(sharedPreferences.getString(NOTIFICATIONS, "[]"));
+
+        ArrayList<String> listdata = new ArrayList<String>();
+
+        //Checking whether the JSON array has some value or not
+        if (jsonArray != null) {
+
+            //Iterating JSON array
+            for (int i=0;i<jsonArray.length();i++){
+
+                //Adding each element of JSON array into ArrayList
+//                JSONObject jsonObject = new JSONObject(jsonArray.get(i).toString());
+                listdata.add(jsonArray.get(i).toString());
+            }
+        }
+
+        return listdata;
+    }
+
     public ArrayList<String> getCartQuantities() throws JSONException {
         JSONArray jsonArray = new JSONArray(sharedPreferences.getString(KEY_QTY, "[]"));
 
@@ -203,6 +226,9 @@ public class UserSession extends Fragment {
     * */
     public void addToCart(final ProductWithCarousel product, final int qty) throws JSONException {
 
+        String notification = product.product.getItemName() + " added to cart";
+        addToNotifications(notification);
+
         String cartsStrJson = sharedPreferences.getString(CARTS,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
         String qtyStrJson = sharedPreferences.getString(KEY_QTY,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
 
@@ -227,12 +253,34 @@ public class UserSession extends Fragment {
 
     }
 
+    public void addToNotifications(final String notification) throws JSONException {
+
+        String notificationsStrJson = sharedPreferences.getString(NOTIFICATIONS,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
+
+        JSONArray notificationsJsonArray = new JSONArray(notificationsStrJson);
+        notificationsJsonArray.put(notification);
+
+        editor.putString(NOTIFICATIONS, notificationsJsonArray.toString());
+        editor.commit();
+
+        notificationsStrJson = sharedPreferences.getString(NOTIFICATIONS,"[]");
+
+        System.out.println("NOTIFICATIONS");
+        System.out.println(notificationsStrJson);
+
+    }
+
     public void removeFromCart(int position) throws JSONException {
 
         String cartsStrJson = sharedPreferences.getString(CARTS,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
         String qtyStrJson = sharedPreferences.getString(KEY_QTY,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
 
         JSONArray cartsJsonArray = new JSONArray(cartsStrJson);
+
+        JSONObject product = new JSONObject(cartsJsonArray.get(position).toString());
+        String notification = product.getJSONObject("product").getString("itemName") + " removed from cart";
+        addToNotifications(notification);
+
         cartsJsonArray.remove(position);
 //        cartsJsonArray.put(new Gson().toJson(product));
 
