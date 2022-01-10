@@ -1,5 +1,6 @@
 package com.pucmm.csti.ui.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.pucmm.csti.R;
+import com.pucmm.csti.activity.CartActivity;
+import com.pucmm.csti.activity.MainActivity;
 import com.pucmm.csti.utils.UserSession;
 
 import org.json.JSONArray;
@@ -87,6 +91,24 @@ public class CartFragment extends Fragment {
 //            cartQuantities = session.getCartQuantities();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+
+        Button completePurchase = view.findViewById(R.id.completePurchase);
+
+        completePurchase.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                session.clearCart();
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        if(cartItems.size() > 0) {
+            completePurchase.setVisibility(View.VISIBLE);
+        } else {
+            completePurchase.setVisibility(View.INVISIBLE);
         }
 
         ListView listView = (ListView) view.findViewById(R.id.cartList);

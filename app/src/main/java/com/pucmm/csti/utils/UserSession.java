@@ -255,6 +255,13 @@ public class UserSession extends Fragment {
 
     }
 
+    public void clearCart() {
+
+        editor.putString(CARTS, "[]");
+        editor.putString(KEY_QTY, "[]");
+        editor.commit();
+    }
+
     private JsonArray sortedCart(String jsonArrStr) {
 
         JsonArray jsonArr = new Gson().fromJson(jsonArrStr, JsonArray.class);
