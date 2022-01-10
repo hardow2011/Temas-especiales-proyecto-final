@@ -92,13 +92,16 @@ public class CartAdapter extends ArrayAdapter<JSONObject> {
     private void updateQuantity(int position, int amount, TextView cartItemQuantity) throws JSONException {
         int originalQuantity = Integer.parseInt(cartItemQuantity.getText().toString());
         int newQuantity = originalQuantity + amount;
-        cartItemQuantity.setText(String.valueOf(newQuantity));
+        if(newQuantity >= 1) {
+            cartItemQuantity.setText(String.valueOf(newQuantity));
 
-        ArrayList<String> newSessionQuantities = session.getCartQuantities();
-        newSessionQuantities.set(position, String.valueOf(newQuantity));
-        session.replaceCartQuantities(newSessionQuantities);
+            ArrayList<String> newSessionQuantities = session.getCartQuantities();
+            newSessionQuantities.set(position, String.valueOf(newQuantity));
+            session.replaceCartQuantities(newSessionQuantities);
 
-        retrieveSession();
+            retrieveSession();
+        }
+
     }
 
     private void retrieveSession() {
