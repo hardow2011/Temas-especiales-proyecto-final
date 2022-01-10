@@ -74,6 +74,7 @@ public class CartAdapter extends ArrayAdapter<JSONObject> {
             }
         });
 
+        View finalConvertView = convertView;
         removeButton.setOnClickListener(view -> {
             System.out.println("HOLA");
             try {
@@ -82,6 +83,7 @@ public class CartAdapter extends ArrayAdapter<JSONObject> {
 //                cartList.invalidateViews();
 //                cartList.position
 //                cartItemWrapper.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+                finalConvertView.setVisibility(View.INVISIBLE);
 
             } catch (JSONException e) {
                 e.printStackTrace();
