@@ -227,6 +227,34 @@ public class UserSession extends Fragment {
 
     }
 
+    public void removeFromCart(int position) throws JSONException {
+
+        String cartsStrJson = sharedPreferences.getString(CARTS,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
+        String qtyStrJson = sharedPreferences.getString(KEY_QTY,"[]");//second parameter is necessary ie.,Value to return if this preference does not exist.
+
+        JSONArray cartsJsonArray = new JSONArray(cartsStrJson);
+        cartsJsonArray.remove(position);
+//        cartsJsonArray.put(new Gson().toJson(product));
+
+        JSONArray qtyJsonArray = new JSONArray(qtyStrJson);
+        qtyJsonArray.remove(position);
+//        qtyJsonArray.put(new Gson().toJson(qty));
+
+
+        editor.putString(CARTS, cartsJsonArray.toString());
+        editor.putString(KEY_QTY, qtyJsonArray.toString());
+        editor.commit();
+
+        cartsStrJson = sharedPreferences.getString(CARTS,"[]");
+        qtyStrJson = sharedPreferences.getString(KEY_QTY,"[]");
+
+        System.out.println("CARTS");
+        System.out.println(cartsStrJson);
+        System.out.println(qtyStrJson);
+        System.out.println("CARTS");
+
+    }
+
     private JsonArray sortedCart(String jsonArrStr) {
 
         JsonArray jsonArr = new Gson().fromJson(jsonArrStr, JsonArray.class);

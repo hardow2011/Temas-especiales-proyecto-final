@@ -3,11 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/cartItemWrapper">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:backgroundTint="#ECAC7A">
 
         <ImageView
             android:id="@+id/cartItemImage"
@@ -34,7 +36,7 @@
             android:id="@+id/minusButton"
             android:layout_width="41dp"
             android:layout_height="43dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="32dp"
             android:layout_marginBottom="16dp"
             android:text="-"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -59,6 +61,16 @@
             android:text="0"
             app:layout_constraintBaseline_toBaselineOf="@+id/minusButton"
             app:layout_constraintStart_toEndOf="@+id/minusButton" />
+
+        <Button
+            android:id="@+id/removeButton"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_marginStart="24dp"
+            android:backgroundTint="#FF0000"
+            android:text="X"
+            app:layout_constraintBaseline_toBaselineOf="@+id/cartItemName"
+            app:layout_constraintStart_toEndOf="@+id/cartItemName" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

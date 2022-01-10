@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,8 @@ public class CartAdapter extends ArrayAdapter<JSONObject> {
         TextView cartItemQuantity = convertView.findViewById(R.id.cartItemQuantity);
         Button minusButton = convertView.findViewById(R.id.minusButton);
         Button plusButton = convertView.findViewById(R.id.plusButton);
+        Button removeButton = convertView.findViewById(R.id.removeButton);
+        View cartItemWrapper = convertView.findViewById(R.id.cartItemWrapper);
 
 
         minusButton.setOnClickListener(view -> {
@@ -66,6 +69,20 @@ public class CartAdapter extends ArrayAdapter<JSONObject> {
         plusButton.setOnClickListener(view -> {
             try {
                 updateQuantity(position, 1, cartItemQuantity);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        });
+
+        removeButton.setOnClickListener(view -> {
+            System.out.println("HOLA");
+            try {
+                removeFromCart(position);
+                ListView cartList = (ListView) view.findViewById(R.id.cartList);
+//                cartList.invalidateViews();
+//                cartList.position
+//                cartItemWrapper.setLayoutParams(new ViewGroup.LayoutParams(0, 0));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -102,6 +119,10 @@ public class CartAdapter extends ArrayAdapter<JSONObject> {
             retrieveSession();
         }
 
+    }
+
+    private void removeFromCart(int position) throws JSONException {
+        session.removeFromCart(position);
     }
 
     private void retrieveSession() {
